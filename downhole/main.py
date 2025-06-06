@@ -46,8 +46,12 @@ class Chalk_Detector:
 
         while True:
             # Read BLUE intensity in mA from RGB sensor and output via DAC
+            r = self.rgbSensor.read_colour_mA(RED)
+            g = self.rgbSensor.read_colour_mA(GREEN)
+            b = self.rgbSensor.read_colour_mA(BLUE)
+            print(f'R: {r}\tG: {g}\tB: {b}\n')
             self.dac.output(self.rgbSensor.read_colour_mA(BLUE))
-            time.sleep_ms(MEASUREMENT_LATENCY_MS)  # Small delay to limit sampling rate
+            time.sleep_ms(1000)  # Small delay to limit sampling rate
 
 
 if __name__ == "__main__":
