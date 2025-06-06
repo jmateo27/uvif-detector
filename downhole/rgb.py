@@ -23,8 +23,8 @@ RED   = 1
 GREEN = 2
 BLUE  = 3
 
-# Custom scaling for blue channel (empirical or expected max reading)
-BLUE_MAX_READING = 4000
+# Custom scaling for green channel (empirical or expected max reading)
+GREEN_MAX_READING = 150
 
 
 class RGB_Sensor:
@@ -84,7 +84,7 @@ class RGB_Sensor:
         raw_reading = self.read_colour_raw(colour)
 
         # Blue channel uses a different expected maximum for scaling
-        if colour == BLUE:
-            return raw_reading / BLUE_MAX_READING * CURRENT_RANGE_mA + CURRENT_MIN_mA
+        if colour == GREEN:
+            return raw_reading / GREEN_MAX_READING * CURRENT_RANGE_mA + CURRENT_MIN_mA
         else:
             return raw_reading / VEML3328_MAX_READING * CURRENT_RANGE_mA + CURRENT_MIN_mA

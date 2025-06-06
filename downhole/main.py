@@ -1,5 +1,4 @@
 from rgb import RGB_Sensor           # Import RGB sensor class
-from led import LED                 # Import LED control class
 from dac4to20 import DAC_4to20     # Import DAC class for 4–20 mA output
 
 import time
@@ -46,12 +45,12 @@ class Chalk_Detector:
 
         while True:
             # Read BLUE intensity in mA from RGB sensor and output via DAC
-            r = self.rgbSensor.read_colour_mA(RED)
-            g = self.rgbSensor.read_colour_mA(GREEN)
-            b = self.rgbSensor.read_colour_mA(BLUE)
+            r = self.rgbSensor.read_colour_raw(RED)
+            g = self.rgbSensor.read_colour_raw(GREEN)
+            b = self.rgbSensor.read_colour_raw(BLUE)
             print(f'R: {r}\tG: {g}\tB: {b}\n')
-            self.dac.output(self.rgbSensor.read_colour_mA(BLUE))
-            time.sleep_ms(1000)  # Small delay to limit sampling rate
+            self.dac.output(self.rgbSensor.read_colour_mA(GREEN))
+            time.sleep_ms(MEASUREMENT_LATENCY_MS)  # Small delay to limit sampling rate
 
 
 if __name__ == "__main__":
